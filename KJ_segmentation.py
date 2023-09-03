@@ -1,0 +1,52 @@
+from PIL import Image
+import os
+from AK_graycamera import analyze_color_range_score, analyze_positive_space
+import cv2
+
+def determine_img_to_seg():
+    folder_path = "CMP_IMAGES"
+    directory_list = os.listdir(folder_path)
+
+    visual_index_sum = 0
+    best_img = None
+
+    for file in directory_list:
+        color_range_score = analyze_color_range_score(f"{folder_path}/{file}")
+        positive_space_score = analyze_positive_space(f"{folder_path}/{file}")
+
+        print(f"Scores for {file}:", color_range_score, positive_space_score)
+        if (color_range_score + positive_space_score) > visual_index_sum:
+            visual_index_sum = color_range_score + positive_space_score
+            best_img = file
+
+    return best_img # string path of the best image
+
+def segmented_image(input_path, output_folder, segment_size = (400, 400)):
+
+    if not os.path.exists(output_folder):
+        os.makedirs(output_folder)
+
+    img = Image.open(input_path)
+    img_width, img_height = img.size
+
+    if img_width != 4000 or img_height != 4000:
+        print(f"Expecting a 4000 x 4000 image, got {img_width} x {img_height} instead")
+        return 
+    
+    for i in range(0, img_width, segment_size[0]):
+        for j in range(0, img_height, segment_size[1]):
+            box = (i, j, i+segment_size[0], j+segment_size[1])
+            segment = img.crop(box)
+
+            output_path = os.path.join(output_folder, "segment_{}_{}.webp".format(int(i/segment_size[0]), int(j/segment_size[1])))
+            segment.save(output_path, 'webp', optimize = True, quality = 10)
+
+    print("Segmentation complete!")
+
+folder_path = "CMP_IMAGES"
+output_folder = "/Users/a970/Documents/CamCode/10_SEGMENTED_IMAGES"
+best_img = determine_img_to_seg()
+# in our case, b/c CMPNAmericaEarth has the greatest sum of index, it segments that image
+segmented_image(f"{folder_path}/{best_img}", output_folder)
+
+    
