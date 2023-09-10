@@ -34,8 +34,8 @@ def pixel_percentage(file, upper_limit):
     count = pixel_count(file, upper_limit)
     return count / len(list(img.getdata())) * 100
 
-for file_name in sorted(os.listdir(f'SEGMENTED_IMAGES')):
-    path_name = f'SEGMENTED_IMAGES/{file_name}'
+for file_name in sorted(os.listdir(f'10_SEGMENTED_IMAGES')):
+    path_name = f'10_SEGMENTED_IMAGES/{file_name}'
     max_color = [50, 50, 50]
     #print(pixel_count(path_name, max_color))
     print(f"Values for {file_name}: {pixel_count(path_name, max_color)} px, {pixel_percentage(path_name, max_color)}%")
