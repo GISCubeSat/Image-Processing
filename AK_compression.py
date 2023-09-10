@@ -2,17 +2,18 @@ import cv2
 import numpy as np
 from PIL import Image
 
+ak_path = "/Users/Arush/Documents/GitHub/Image-Processing/ORIGINAL_IMAGES"
 files = [
     # '/Users/a970/Documents/CamCode/NAmericaEarth.jpeg',
     # '/Users/a970/Documents/CamCode/BlueEarthTest.jpeg',
     # '/Users/a970/Documents/CamCode/Polar(Clouds).jpeg'
-    'NAmericaEarth.jpeg',
     'BlueEarthTest.jpeg',
+    'NAmericaEarth.jpeg',
     'Polar(Clouds).jpeg'
 ]
 
-def compress(file, factor, img_quality):
-    img = Image.open(file)
+def compress(folder, file, factor, img_quality):
+    img = Image.open(f"{folder}/{file}")
 
     width, height = img.size
     new_size = (width//factor, height//factor)
@@ -54,7 +55,7 @@ def analyze_black_score(filename):
 
     return 100 - (1 - npix/(rows*cols))*100
 
-for file in files:
+"""for file in files:
     new_file = thumbnail(file, 10, 50)
     print(f"Color range score for {new_file}:", (analyze_color_range_score(new_file)))
-    print(f"\t Negative Space: {analyze_black_score(new_file)}")
+    print(f"\t Negative Space: {analyze_black_score(new_file)}")"""
