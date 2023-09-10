@@ -30,8 +30,8 @@ def segmented_image(input_path, output_folder, segment_size = (160, 120)):
     img = Image.open(input_path)
     img_width, img_height = img.size
 
-    if img_width != 2560 or img_height != 1920:
-        print(f"Expecting a 2560 x 1920 image, got {img_width} x {img_height} instead")
+    if img_width/img_height != 4/3:
+        print(f"Expecting a 4:3 image, got {img_width} x {img_height} instead")
         return 
     
     for i in range(0, img_width, segment_size[0]):
@@ -49,7 +49,7 @@ folder_path = "CMP_IMAGES"
 output_folder = "/Users/Arush/Documents/GitHub/Image-Processing/10_SEGMENTED_IMAGES"
 # best_img = determine_img_to_seg()
 #best_img = "/Users/a970/Documents/Image-Processing/ORIGINAL_IMAGES/Earth2560x1920.jpeg"
-best_img = "Earth2560x1920.jpeg"
+best_img = "CMPEarth2560x1920.jpeg"
 # in our case, b/c CMPNAmericaEarth has the greatest sum of index, it segments that image
 segmented_image(f"{folder_path}/{best_img}", output_folder)
 

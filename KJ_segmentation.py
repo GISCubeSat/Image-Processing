@@ -49,7 +49,7 @@ folder_path = "CMP_IMAGES"
 output_folder = "/Users/Arush/Documents/GitHub/Image-Processing/10_SEGMENTED_IMAGES"
 # best_img = determine_img_to_seg()
 #best_img = "/Users/a970/Documents/Image-Processing/ORIGINAL_IMAGES/Earth2560x1920.jpeg"
-best_img = "Earth2560x1920.jpeg"
+best_img = "CMPEarth2560x1920.jpeg"
 # in our case, b/c CMPNAmericaEarth has the greatest sum of index, it segments that image
 segmented_image(f"{folder_path}/{best_img}", output_folder)
 
