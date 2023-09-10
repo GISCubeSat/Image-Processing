@@ -1,6 +1,7 @@
 from PIL import Image
 import os
 from AK_graycamera import analyze_color_range_score, analyze_positive_space
+from AK_compression import thumbnail, compress
 import cv2
 
 def determine_img_to_seg():
@@ -21,7 +22,7 @@ def determine_img_to_seg():
 
     return best_img # string path of the best image
 
-def segmented_image(input_path, output_folder, segment_size = (400, 400)):
+def segmented_image(input_path, output_folder, segment_size = (160, 120)):
 
     if not os.path.exists(output_folder):
         os.makedirs(output_folder)
@@ -29,8 +30,8 @@ def segmented_image(input_path, output_folder, segment_size = (400, 400)):
     img = Image.open(input_path)
     img_width, img_height = img.size
 
-    if img_width != 4000 or img_height != 4000:
-        print(f"Expecting a 4000 x 4000 image, got {img_width} x {img_height} instead")
+    if img_width != 2560 or img_height != 1920:
+        print(f"Expecting a 2560 x 1920 image, got {img_width} x {img_height} instead")
         return 
     
     for i in range(0, img_width, segment_size[0]):
@@ -45,7 +46,8 @@ def segmented_image(input_path, output_folder, segment_size = (400, 400)):
 
 folder_path = "CMP_IMAGES"
 output_folder = "/Users/a970/Documents/CamCode/10_SEGMENTED_IMAGES"
-best_img = determine_img_to_seg()
+# best_img = determine_img_to_seg()
+best_img = "/Users/a970/Documents/Image-Processing/ORIGINAL_IMAGES/Earth2560x1920.jpeg"
 # in our case, b/c CMPNAmericaEarth has the greatest sum of index, it segments that image
 segmented_image(f"{folder_path}/{best_img}", output_folder)
 
