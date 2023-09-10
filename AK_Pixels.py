@@ -34,6 +34,17 @@ def pixel_percentage(file, upper_limit):
     count = pixel_count(file, upper_limit)
     return count / len(list(img.getdata())) * 100
 
+def filter_image(files, upper_limit):
+    return_list = []
+    for file in files:
+        percentOfBlackPixels = pixel_percentage(file, upper_limit)
+        if percentOfBlackPixels < 20:
+            return_list.append(file)
+    return return_list
+
+ 
+        
+
 for file_name in sorted(os.listdir(f'10_SEGMENTED_IMAGES')):
     path_name = f'10_SEGMENTED_IMAGES/{file_name}'
     max_color = [50, 50, 50]
