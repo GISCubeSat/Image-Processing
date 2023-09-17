@@ -14,7 +14,7 @@ def pixel_analysis(file, upper_limit):
 
     return new_list
 
-def pixel_count(file, upper_limit):
+def pixel_count(file, lower_limit, upper_limit, step):
     from PIL import Image
 
     img = Image.open(file)
@@ -22,31 +22,37 @@ def pixel_count(file, upper_limit):
     pixels = list(img.getdata())
     cnt = 0
 
-    for i in range(0, len(pixels), 20):
-        if pixels[i][0] <= upper_limit[0] and pixels[i][1] <= upper_limit[1] and pixels[i][2] <= upper_limit[2]:
+    for i in range(0, len(pixels), step):
+        if lower_limit[0] <= pixels[i][0] <= upper_limit[0] and \
+        lower_limit[1] <= pixels[i][1] <= upper_limit[1] \
+        and lower_limit[2] <= pixels[i][2] <= upper_limit[2]:
             cnt += 1
     
     return cnt
 
-def pixel_percentage(file, upper_limit):
+def pixel_percentage(file, lower_limit, upper_limit, step):
     from PIL import Image
     img = Image.open(file)
-    count = pixel_count(file, upper_limit)
-    return count / len(list(img.getdata()))
+    count = pixel_count(file, lower_limit, upper_limit, step)
+    return count / (len(list(img.getdata()))/step) * 100
 
-def filter_image(folder, files, upper_limit, percent_limit):
+def filter_image(folder, files, lower_limit, upper_limit, percent_limit, step):
     return_list = []
     for file in files:
-        percentOfBlackPixels = pixel_percentage(f'{folder}/{file}', upper_limit)
+        percentOfBlackPixels = pixel_percentage(f'{folder}/{file}', lower_limit, upper_limit, step)
         if percentOfBlackPixels < percent_limit:
-            return_list.append(file)
+            return_list.append(file[0:11])
     return return_list
 
-print(filter_image("10_SEGMENTED_IMAGES", os.listdir(f"10_SEGMENTED_IMAGES"), [50, 50, 50], 1))
-
-"""for file_name in sorted(os.listdir(f'10_SEGMENTED_IMAGES')):
-    path_name = f'10_SEGMENTED_IMAGES/{file_name}'
-    max_color = [50, 50, 50]
-    #print(pixel_count(path_name, max_color))
-    print(f"Values for {file_name}: {pixel_count(path_name, max_color)} px, {pixel_percentage(path_name, max_color)}%")
-    """
+"""folder = "10_SEGMENTED_IMAGES"
+files = os.listdir(f"10_SEGMENTED_IMAGES")
+u_color = [6, 6, 6]
+l_color = [4, 4, 4]
+step = 10
+percentage = 1
+directory = f'{folder}/'
+#print(pixel_percentage(f'{folder}/{files[6]}', color, 10))
+filtered_list = sorted(filter_image(folder, files, l_color, u_color, percentage, step))
+print(filtered_list)
+for file in files:
+    print(pixel_percentage(directory + file, l_color, u_color, step))"""
