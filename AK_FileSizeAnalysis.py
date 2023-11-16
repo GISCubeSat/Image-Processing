@@ -2,9 +2,9 @@
 import os
 
 class File():
-    def __init__(self, file):
+    def __init__(self, directory, file):
         self.file = file
-        self.img_size = os.stat(self.file).st_size
+        self.img_size = os.stat(directory + '/' + self.file).st_size
     
     def size(self):
         return self.img_size
@@ -15,10 +15,17 @@ class File():
     def __repr__(self):
         return str(self.file)
 
-def create_file(file_name):
-    return File(file_name)
+def create_file(directory, file_name):
+    return File(directory, file_name)
 
-files = [create_file("CMPBlueEarthTest.jpeg"), create_file("CMPEarth2560x1920.jpeg")]
+folder = "ORIGINAL_IMAGES"
+file_names = os.listdir(folder)
+files = []
+
+for name in file_names:
+    files.append(create_file(folder, name))
+
 limit_kb = 2000
+limit_b = limit_kb*1000
 for file in files:
-    print(file.file, '=', file.fits_constraint(limit_kb))
+    print(file.file, '|', file.img_size, '=', file.fits_constraint(limit_b))
