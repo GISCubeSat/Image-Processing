@@ -19,6 +19,6 @@ def create_file(file_name):
     return File(file_name)
 
 files = [create_file("CMPBlueEarthTest.jpeg"), create_file("CMPEarth2560x1920.jpeg")]
-limit_kb = 2
+limit_kb = 2000
 for file in files:
-    print(file.size(), file.fits_constraint(limit_kb*1000))
+    print(file.file, '=', file.fits_constraint(limit_kb))
