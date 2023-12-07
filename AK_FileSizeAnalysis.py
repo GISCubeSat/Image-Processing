@@ -18,7 +18,7 @@ class File():
 def create_file(directory, file_name):
     return File(directory, file_name)
 
-folder = "ORIGINAL_IMAGES"
+"""folder = "ORIGINAL_IMAGES"
 file_names = os.listdir(folder)
 files = []
 
@@ -28,4 +28,4 @@ for name in file_names:
 limit_kb = 2000
 limit_b = limit_kb*1000
 for file in files:
-    print(file.file, '|', file.img_size, '=', file.fits_constraint(limit_b))
+    print(file.file, '|', file.img_size, '=', file.fits_constraint(limit_b))"""

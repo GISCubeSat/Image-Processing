@@ -42,7 +42,7 @@ def filter_image(folder, files, upper_limit, percent_limit):
             return_list.append(file)
     return return_list
 
-print(filter_image("10_SEGMENTED_IMAGES", os.listdir(f"10_SEGMENTED_IMAGES"), [50, 50, 50], 1))
+#print(filter_image("10_SEGMENTED_IMAGES", os.listdir(f"10_SEGMENTED_IMAGES"), [50, 50, 50], 1))
 
 """for file_name in sorted(os.listdir(f'10_SEGMENTED_IMAGES')):
     path_name = f'10_SEGMENTED_IMAGES/{file_name}'
