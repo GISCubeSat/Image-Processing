@@ -18,8 +18,10 @@ def pixel_count(file, upper_limit):
     from PIL import Image
 
     img = Image.open(file)
+    img = img.convert("RGB")
 
-    pixels = list(img.getdata())
+    pixels = img.getdata()
+
     cnt = 0
 
     for pixel in pixels:

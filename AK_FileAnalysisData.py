@@ -6,7 +6,7 @@ import AK_Pixels as pixels
 
 data_upload = open('graph_data.satdata', 'w')
 
-directory = "LEO"
+directory = "/Users/Arush/Documents/GitHub/Image-Processing/LEO_Masks"
 files = os.listdir(directory)
 
 file_objs = [File(directory, file) for file in files]

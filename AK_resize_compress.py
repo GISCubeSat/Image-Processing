@@ -1,0 +1,1 @@
+def resize(image, width, height, resolution)

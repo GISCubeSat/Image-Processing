@@ -1,7 +1,8 @@
 import cv2
 import numpy as np
 
-img = cv2.imread('NAmericaEarth.jpeg')
+path = "/Users/Arush/Documents/GitHub/Image-Processing/ORIGINAL_IMAGES/"
+img = cv2.imread(path + 'NAmericaEarth.jpeg')
 
 hsv = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)
 
