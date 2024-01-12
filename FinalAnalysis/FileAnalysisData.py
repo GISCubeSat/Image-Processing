@@ -1,8 +1,8 @@
 """RUN THIS ONLY ONCE (when you have all the files)"""
 
 import os
-from AK_FileSizeAnalysis import File
-import AK_Pixels as pixels
+from FileSizeAnalysis import File
+import PixelPercentages as pixels
 
 data_upload = open('graph_data.satdata', 'w')
 

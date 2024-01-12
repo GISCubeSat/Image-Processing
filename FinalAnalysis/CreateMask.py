@@ -1,5 +1,5 @@
 import os
-import AK_HighContrastEffect as hce
+import HighContrastEffect as hce
 
 directory = "LEO_Resized"
 files = os.listdir(directory)
