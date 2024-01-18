@@ -19,5 +19,7 @@ for i in range(file_count):
 x = np.array(x_vals)
 y = np.array(y_vals)
 
+plt.xlabel('Percentage of Black')
+plt.ylabel('File Size')
 plt.plot(x, y, 'o')
 plt.show()

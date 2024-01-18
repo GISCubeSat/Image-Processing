@@ -63,3 +63,14 @@ def high_contrast_effect_2(path, image, result_name):
     result = cv2.bitwise_and(img,img, mask= mask)
 
     return cv2.imwrite(result_name, result)
+
+def high_contrast_effect_3(path, image, result_name):
+    from PIL import Image, ImageEnhance
+    
+    img = Image.open(f"{path}/{image}")
+    hsv = img.convert('HSV')
+    enhancer = ImageEnhance.Contrast(hsv)
+    enhanced_img = enhancer.enhance(1.0)
+    rgb = enhanced_img.convert('RGB')
+    rgb.save(result_name)
+    print(f"MASK {image} successfully saved!!")
